@@ -1,0 +1,43 @@
+This includes three things:
+
+1) a custom loader which lets you overload code igniter's database drivers
+
+2) a custom database driver for postgresql which allows you to use the superior pg_query_params rather than pg_query in your queries, and a custom profiler overload to take this change into account
+
+3) a custom database driver for mysql which gives you access to "replace into", "insert ignore" and insert ... on duplicate key"
+
+--------
+
+INSTALL:
+
+* Custom Loader:
+
+1) Copy application/core/MY_Loader.php inside your own application/core directory
+
+You can now overload drivers by putting your own version inside the application/core/ directory (see the provided drivers for example)
+
+* Postgresql driver:
+
+1) Install the custom loader
+
+2) Copy application/core/MY_DB_postgre_driver.php inside your own application/core directory
+
+3) If you want the customized profiler, copy application/libraries/MY_Profiler inside your own application/libraries directory
+
+* Mysql driver:
+
+1) Install the custom loader
+
+2) Copy application/core/MY_DB_mysql_driver.php inside your own application/core directory
+
+--------
+
+USAGE:
+
+See the examples.
+
+--------
+
+LINKS:
+
+Original code used as base for the custom loader: http://codeigniter.com/wiki/Extending_Database_Drivers

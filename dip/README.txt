@@ -1,0 +1,68 @@
+This is a working DIP for Code Igniter 2.0+, allowing you to use code igniter's libraries, views and models inside external applications (for exemple, to integrate code igniter inside a forum or blog application).
+
+Contrary to other DIP for CI this one does not load anything beside the strict core, thus no request dispatching is made, several ci default libs are not automatically loaded (benchmark, ...) and no events are sent to hooks. In fact, hooks are not even loaded.
+
+For exemple, with this your code in "my_cool_forum.php" could do something like
+
+...
+$ci = get_instance();
+$ci->load->model('user');
+$ci->user->update_postcount(42);
+...
+
+Without any overhead or mapping to a CI controller/action.
+
+If you have a custom base controller (usually application/core/MY_Controller.php) it will be used instead of the standard CI_Controller
+
+--------
+
+INSTALL:
+
+1) Copy the application/tools/ci_core.php inside your own application directory.
+
+2) If your code igniter index.php file is not using a default layout such as this:
+
+/yourapp/application/
+/yourapp/index.php
+
+Edit ci_core.php around line 12 and put the right path to your index.php in the require() call; eg require('../../my_sub_directory/index.php');
+
+3) Edit your index.php at the very end and add the 3 lines before the very last require:
+
+/*
+ * --------------------------------------------------------------------
+ * LOAD THE BOOTSTRAP FILE
+ * --------------------------------------------------------------------
+ *
+ * And away we go...
+ *
+ */
+
+// add those next three lines
+
+if (defined('NO_CI_INIT')) {
+  return;
+}
+
+// you're done !
+
+require_once BASEPATH.'core/CodeIgniter.php';
+
+--------
+
+USAGE:
+
+1) Include the ci_core.php file from wherever your external application is
+
+2) call get_instance() to get your ci object, and start using it !
+
+See the exemple.
+
+--------
+
+LINKS:
+
+Another DIP for CI 2: https://github.com/reggi/CodeIgniter-Dip
+This one however loads the full CI environment.
+
+Old DIP for CI 1.X: http://codeigniter.com/wiki/dip_into_CI/
