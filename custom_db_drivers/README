@@ -4,7 +4,7 @@ This includes three things:
 
 2) a custom database driver for postgresql which allows you to use the superior pg_query_params rather than pg_query in your queries, and a custom profiler overload to take this change into account
 
-3) a custom database driver for mysql which gives you access to "replace into", "insert ignore" and insert ... on duplicate key"
+3) a custom database driver for mysql which gives you access to "replace into", "insert ignore" and "insert ... on duplicate key"
 
 --------
 
